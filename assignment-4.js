@@ -10,15 +10,12 @@ function calculateMoney(ticketSale){
     }
 }
 
-
-
-
 function checkName(name){
     if(typeof name !=="string"){
         return "invalid";
     }
     else{
-        const lastLetter =name[name.length-1].toLowerCase();
+        const lastLetter =name.trim()[name.length-1].toLowerCase();
         const matchLetters= ["a", "y", "i", "e", "o", "u", "w"]
         if(matchLetters.includes(lastLetter)){
             return "Good Name";
@@ -48,16 +45,17 @@ function deleteInvalids(Arr){
 }
 
 function password(obj){
-    if(typeof obj !== "object" && obj.name=== undefined || obj.birthYear === undefined || obj.siteName===undefined || obj.birthYear.toString().length!== 4){
+    if(typeof obj !== "object" || obj.name=== undefined || obj.name.trim() === ""  || obj.birthYear === undefined || obj.birthYear === "" || obj.siteName===undefined ||obj.siteName.trim()==="" || obj.birthYear.toString().trim().length!== 4){
         return "invalid";
     }
 
     else{
         
-        const site = obj.siteName[0].toUpperCase() + obj.siteName.slice(1)
-        return `${site}#${obj.name}@${obj.birthYear}`;       
+        const site = obj.siteName.trim()[0].toUpperCase() + obj.siteName.trim().slice(1)
+        return `${site}#${obj.name.trim()}@${obj.birthYear.toString().trim()}`;       
     }
 }
+
 
 function monthlySavings(allPayments, livingCost){
         let totalIncome = 0;
@@ -82,12 +80,10 @@ function monthlySavings(allPayments, livingCost){
             }
 
         const savings = totalIncome - livingCost;
-        if((savings)>=0){
+        if(savings>=0){
             return savings;
         }
         else{
             return "earn more";
         }
 }
-
-
